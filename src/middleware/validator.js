@@ -1,4 +1,5 @@
 import { check, sanitize } from 'express-validator';
+
 /**
  * Usage: POST /check-valid-username
  */

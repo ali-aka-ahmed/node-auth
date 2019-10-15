@@ -12,7 +12,7 @@ const options = {
 const logger = new Logger(options);
 
 if (process.env.NODE_ENV !== "production") {
-    logger.debug("Logging initialized at debug level");
+    logger.info("Logging initialized at debug level");
 }
 
 export default logger;

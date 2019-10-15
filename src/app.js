@@ -1,17 +1,15 @@
 import express from 'express';
 import compression from 'compression';
-import session from 'express-session';
 import bodyParser from 'body-parser';
 import lusca from 'lusca';
-import mongo from 'connect-mongo';
 import path from 'path';
 import passport from 'passport';
-import { connect } from './models';
-import { MONGODB_URI, SESSION_SECRET } from './util/secrets';
+import httpLogger from 'morgan';
+import { connectMongo } from './models';
+import { MONGODB_URI } from './util/secrets';
 
 // connect to MongoDB
-connect(MONGODB_URI)
-const MongoStore = mongo(session);
+connectMongo(MONGODB_URI);
 
 // Create Express server
 const app = express();
@@ -21,19 +19,11 @@ app.set("port", process.env.PORT || 5000);
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(session({
-    resave: true,
-    saveUninitialized: true,
-    secret: SESSION_SECRET,
-    store: new MongoStore({
-        url: MONGODB_URI,
-        autoReconnect: true
-    })
-}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
+app.use(httpLogger('dev', { skip: () => app.get('env') === 'test' }));
 app.use((req, res, next) => {
     res.locals.user = req.user;
     next();
