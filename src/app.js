@@ -23,7 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
-app.use(httpLogger('dev', { skip: () => app.get('env') === 'test' }));
+app.use(httpLogger('dev', { skip: () => process.env.NODE_ENV === "production" }));
 app.use((req, res, next) => { res.locals.user = req.user; next(); });
 app.use( express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 
