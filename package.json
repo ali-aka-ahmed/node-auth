@@ -1,10 +1,10 @@
 {
-  "name": "community-backend",
+  "name": "node-auth",
   "version": "1.0.0",
-  "description": "Community backend server. ExpressJS.",
-  "repository": "https://github.com/ali-wetrill/community-backend",
-  "author": "Ali Ahmed <ali@simplata.io>",
-  "license": "UNLICENSED",
+  "description": "Node backend server with auth!",
+  "repository": "https://github.com/ali-wetrill/node-auth",
+  "author": "Ali Ahmed <ali.ahmed@berkeley.edu>",
+  "license": "MIT",
   "main": "dist/index.js",
   "engines": {
     "node": "10.16.3",
