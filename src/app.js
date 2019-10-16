@@ -28,8 +28,8 @@ app.use((req, res, next) => { res.locals.user = req.user; next(); });
 app.use( express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 
 // Passport authentication strategies
-import { localLogin } from './passport';
-import { localSignup } from './passport';
+import { localLogin } from './services/passport';
+import { localSignup } from './services/passport';
 passport.use('local-signup', localSignup);
 passport.use('local-login', localLogin);
 
