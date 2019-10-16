@@ -24,4 +24,12 @@ We use the dotenv library to pass secure keys and tokens and IDs and the like. W
 
 Winston logger is setup (along with bluebird for logging of all HTTP requests)! It's better for logging than console.log -> see more info here: https://www.digitalocean.com/community/tutorials/how-to-use-winston-to-log-node-js-applications 
 
+When using the logger, use it like this: 
+
+import logger from '../util/logger' 
+...
+logger.silly("Hi")
+
+More information in utils/logger.js
+
 #### Happy hacking! Made with ❤️ from Ali.
