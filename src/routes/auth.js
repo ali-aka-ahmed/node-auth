@@ -8,7 +8,7 @@ import * as validator from "../middleware/validator";
 import {validationResult} from "express-validator";
 
 // Models
-import {User} from "../models/User";
+const User = require('../models/User');
 
 const router = new express.Router();
 
@@ -327,4 +327,4 @@ router.post("/reset/:token", validator.checkPassword, (req, res, next) => {
 //
 //
 
-module.exports = router;
+export default router;

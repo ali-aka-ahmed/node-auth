@@ -34,12 +34,12 @@ passport.use('local-signup', localSignup);
 passport.use('local-login', localLogin);
 
 // AUTH CHECK MIDDLEWARE (comment lines to turn off auth)
-const authMiddleware = require('./middleware/auth');
-app.use('/api', authMiddleware.default);
+import authMiddleware from './middleware/auth';
+app.use('/api', authMiddleware);
 
 // ROUTES
-const authRoutes = require('./routes/auth');
-const apiRoutes = require('./routes/api');
+import authRoutes from './routes/auth'
+import apiRoutes from './routes/api'
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
