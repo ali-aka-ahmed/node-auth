@@ -24,6 +24,7 @@ export const checkEmail = [
 
 /**
  * Usage: POST /reset/:token
+ * Usage: POST /update-password
  */
 export const checkPassword = [
   check("password")
@@ -44,12 +45,3 @@ export const checkSignup = [
         .exists().withMessage("Please enter a last name!")
         .isAlpha().withMessage("Does your last name really have a number or special character in it 🤔. Please try again!")
 ].concat(checkUsername).concat(checkEmail).concat(checkPassword);
-
-/**
- * Usage: POST /repository-title-search
- */
-export const checkRepoTitle = [
-  check("title")
-  .exists().withMessage("Please enter a project name!")
-  .custom(value => !/\s/.test(value)).withMessage("Project name cannot have spaces. Try using a dash!")
-];

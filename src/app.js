@@ -24,38 +24,23 @@ app.use(passport.session());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 app.use(httpLogger('dev', { skip: () => app.get('env') === 'test' }));
-app.use((req, res, next) => {
-    res.locals.user = req.user;
-    next();
-});
+app.use((req, res, next) => { res.locals.user = req.user; next(); });
+app.use( express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 
-app.use(
-    express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
-);
-
-// load passport authentication strategies
+// Passport authentication strategies
 import { localLogin } from './passport';
 import { localSignup } from './passport';
 passport.use('local-signup', localSignup);
 passport.use('local-login', localLogin);
 
+// AUTH CHECK MIDDLEWARE (comment lines to turn off auth)
+const authMiddleware = require('./middleware/auth');
+app.use('/api', authMiddleware.default);
 
-// middleware
-import * as validator from "./middleware/validator";
-import authMiddleware from "./middleware/auth";
-
-// controllers
-import * as authServices from "./routes-services/auth";
-
-/**
- * AUTH routes.
- */
-app.post("/signup", validator.checkSignup, authServices.postSignup);
-app.post("/login", validator.checkEmail, authServices.postLogin);
-app.get("/logout", authServices.logout);
-app.post("/check-valid-username", validator.checkUsername, authServices.checkValidUsername);
-app.post("/forgot-password", validator.checkEmail, authServices.postForgot);
-app.post("/reset/:token", validator.checkPassword, authServices.postReset);
-
+// ROUTES
+const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes/api');
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 
 export default app;
