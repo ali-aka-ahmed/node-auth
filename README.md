@@ -47,7 +47,7 @@ let api_inst = axios.create({
 
 // when sending requests from the client, create the following header
 api_inst.interceptors.request.use((config) => {
-    if (userStore.token) { config.headers.Authorization = `bearer ${window.localStorage.getItem("token")}` }
+    config.headers.Authorization = `bearer ${window.localStorage.getItem("token")}`
     return config;
 });
 ...
