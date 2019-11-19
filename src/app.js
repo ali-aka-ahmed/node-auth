@@ -5,6 +5,8 @@ import lusca from 'lusca';
 import path from 'path';
 import passport from 'passport';
 import httpLogger from 'morgan';
+import cors from 'cors';
+import logger from './util/logger';
 import { connectMongo } from './models';
 import { MONGODB_URI } from './util/secrets';
 
@@ -15,6 +17,11 @@ connectMongo(MONGODB_URI);
 const app = express();
 
 // Express configuration
+// Express configuration
+if (process.env.NODE_ENV !== "production") {
+    logger.warn("CORS has been disabled");
+    app.use(cors())
+}
 app.set("port", process.env.PORT || 5000);
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -1,6 +1,15 @@
 Node Auth
 =========================================
-Node backend that is perfect for starting a project. ExpressJS, no Typescript for fast deployment.
+
+Node backend with authentication that is perfect for starting a project. ExpressJS, no Typescript for fast startup.
+
+## Starting up
+
+First create a .env file using .env.example. This file contains sensitive information that should never be committed to your git repository. We have modified .gitignore so this doesn't happen.
+
+npm install
+
+npm run dev
 
 We use token-based authentication. The userId is passed through the token. When the authMiddleware is enabled we check the token then extract the correct user from our MongoDB and attach it to the request. 
 
