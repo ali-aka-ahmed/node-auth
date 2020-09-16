@@ -1,4 +1,4 @@
-Node Auth
+Node Auth [ ON HOLD DO NOT USE! SECURITY VULNERABILITY + NEEDS TO BE UPGRADED ]
 =========================================
 
 Node backend with authentication that is perfect for starting a project. ExpressJS, no Typescript for fast startup.
