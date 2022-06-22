@@ -31,7 +31,7 @@
     "eslint"
   ],
   "dependencies": {
-    "async": "^3.1.0",
+    "async": "^3.2.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "compression": "^1.7.4",
